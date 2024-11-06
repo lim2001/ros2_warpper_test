@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build the package &mdash; OrbbecSDK ROS2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=b37f6b4d" />
+
+  
+    <link rel="shortcut icon" href="../../_static/web_html_logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            OrbbecSDK ROS2
+              <img src="../../_static/orbbec-light_no_colour.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Application Document</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1_overview/overview.html">1. Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_overview/typical_applications.html">1.1. Typical applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_overview/supported_cameras.html">1.2. Supported cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_overview/supported_platforms.html">1.3. Supported platforms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../2_installation/installation.html">2. Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_installation/build_the_package.html">2.1. Build the package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/build_the_package.html#get-source-code-of-orbbecsdk-ros2">2.1.1. Get source code of OrbbecSDK_ROS2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/build_the_package.html#install-environment">2.1.2. Install Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/build_the_package.html#common-configurations">2.1.3. Common Configurations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../2_installation/build_the_package.html#use-v4l2-backend">2.1.3.1. Use V4L2 backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../2_installation/build_the_package.html#predefined-presets">2.1.3.2. Predefined presets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../2_installation/build_the_package.html#depth-work-mode-switch">2.1.3.3. Depth work mode switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../2_installation/build_the_package.html#configuration-of-depth-nfov-and-wfov-modes">2.1.3.4. Configuration of depth NFOV and WFOV modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../2_installation/build_the_package.html#network-device-enumeration">2.1.3.5. Network device enumeration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../2_installation/build_the_package.html#compressed-image">2.1.3.6. Compressed Image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/build_the_package.html#build-project">2.1.4. Build project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/build_the_package.html#building-a-debian-package">2.1.5. Building a Debian Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../2_installation/package_description.html">2.2. Package  description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/package_description.html#all-available-topics">2.2.1. All available topics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/package_description.html#all-available-services">2.2.2. All available services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/package_description.html#launch">2.2.3. Launch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/package_description.html#yaml-files">2.2.4. YAML files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2_installation/package_description.html#coordinate-systems">2.2.5. Coordinate Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../2_installation/package_description.html#ros2-robot-vs-optical-camera-coordination-systems">2.2.5.1. ROS2(Robot) vs Optical(Camera) Coordination Systems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../2_installation/package_description.html#camera-sensor-structure">2.2.5.2. Camera sensor structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../2_installation/package_description.html#tf-from-coordinate-a-to-coordinate-b">2.2.5.3. TF from coordinate A to coordinate B:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html">3. Start single camera</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#id1">3.1. Start single camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#visualizing-data-in-rviz2">3.2. Visualizing Data in RViz2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#display-view-topics-service">3.3. Display view topics service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#example-visualizations">3.4. Example Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#tf-tree-diagram">3.5. TF tree diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html">4. Start multiple cameras</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#identifying-camera-usb-ports">4.1. Identifying Camera USB Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#list-connected-cameras">4.2. List Connected Cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#launching-multiple-cameras">4.3. Launching Multiple Cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#setup-for-multiple-camera-launch">4.4. Setup for Multiple Camera Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#running-the-launch-file">4.5. Running the Launch File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#configuring-the-tf-tree-for-multiple-cameras">4.6. Configuring the TF Tree for Multiple Cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#example-tf-configuration-for-two-cameras">4.7. Example TF Configuration for Two Cameras</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../5_robot_integrations/robot_integra.html">5. Robot Intergrations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_robot_integrations/robot_integrations.html">5.1. Robot integrations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../5_robot_integrations/robot_integrations.html#example-1">5.1.1. Example 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../5_robot_integrations/robot_integrations.html#example2">5.1.2. Example2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../6_advanced/advanced.html">6. Advanced</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/multi_camera_sync.html">6.1. Multi camera sync</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#preparation">6.1.1. Preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#check-the-camera-usb-port">6.1.2. Check the camera usb port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#configure-multi-camera-synced-launch-py">6.1.3. Configure multi_camera_synced.launch.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#run-multi-camera-synced-launch-py">6.1.4. Run multi_camera_synced.launch.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#advanced-parameters">6.1.5. Advanced Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#gmsl-example">6.1.6. Gmsl example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/component_node.html">6.2. Component node</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/component_node.html#creating-a-component-node">6.2.1. Creating a Component Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/component_node.html#loading-a-single-node-into-a-component-container">6.2.2. Loading a Single Node into a Component Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/component_node.html#loading-a-launch-py-into-a-component-container">6.2.3. Loading a launch.py into a Component Container</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/zero_copy.html">6.3. Zero-copy communications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#efficient-intra-process-communication">6.3.1. Efficient intra-process communication:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#example">6.3.2. Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#manually-loading-multiple-components-into-the-same-process">6.3.3. Manually loading multiple components into the same process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#using-a-launch-file">6.3.4. Using a launch file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#limitations">6.3.5. Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/gdb_debug.html">6.4. GDB debug</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#compile-the-program-with-debug-information">6.4.1. Compile the program with debug information:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#start-the-node-with-gdb">6.4.2. Start the node with GDB:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#configure-gdb-in-a-launch-file">6.4.3. Configure GDB in a launch file:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#use-gdb-for-debugging">6.4.4. Use GDB for debugging:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#set-up-linux-to-produce-core-files">6.4.5. Set up Linux to produce core files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#use-vs-code-for-debugging">6.4.6. Use VS Code for debugging:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#use-the-backward-ros-package">6.4.7. Use the backward_ros package:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#use-xterm-terminal-to-open-gdb-debugging">6.4.8. Use xterm terminal to open gdb debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/backward_ros.html">6.5. Backward ros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#add-backward-ros-as-a-dependency">6.5.1. Add <code class="docutils literal notranslate"><span class="pre">backward_ros</span></code> as a dependency:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#configure-cmakelists-txt">6.5.2. Configure <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#build-your-project-with-debug-information">6.5.3. Build your project with debug information:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#run-your-node">6.5.4. Run your node:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#example">6.5.5. Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/benchmark.html">6.6. Benchmark</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/benchmark.html#launch-orbbec-camera-node">6.6.1. Launch Orbbec Camera Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/benchmark.html#use-benchmark-tools">6.6.2. Use Benchmark Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/benchmark.html#configure-and-run-benchmark">6.6.3. Configure and Run Benchmark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/benchmark.html#analyze-results">6.6.4. Analyze Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/fastdds_tuning.html">6.7. Fast DDS Tuning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#adjusting-system-parameters">6.7.1. Adjusting System Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#ip-fragmentation-time">6.7.1.1. IP Fragmentation Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#ip-fragmentation-memory-threshold">6.7.1.2. IP Fragmentation Memory Threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#maximum-buffer-sizes">6.7.1.3. Maximum Buffer Sizes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#fast-dds-configuration">6.7.2. 2. Fast DDS Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#configuration-file-shm-fastdds-xml">6.7.2.1. Configuration File: <code class="docutils literal notranslate"><span class="pre">shm_fastdds.xml</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#environment-variables">6.7.2.2. Environment Variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../7_tools/tool.html">7. Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_tools/tools.html">7.1. Some practical tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#list-devices-node">7.1.1. list_devices_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#list-depth-work-mode-node">7.1.2. list_depth_work_mode_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#list-camera-profile-mode-node">7.1.3. list_camera_profile_mode_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#multi-save-rgbir-node">7.1.4. multi_save_rgbir_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#metadata-save-files-node">7.1.5. metadata_save_files_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#metadata-export-files-node">7.1.6. metadata_export_files_node</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../8_help_center/help_center.html">8. Help Center</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8_help_center/FAQ.html">8.1. FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../8_help_center/FAQ.html#unexpected-crash">8.1.1. Unexpected Crash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../8_help_center/FAQ.html#no-data-stream-from-multiple-cameras">8.1.2. No Data Stream from Multiple Cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../8_help_center/FAQ.html#additional-troubleshooting">8.1.3. Additional Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../8_help_center/FAQ.html#why-are-there-so-many-launch-files">8.1.4. Why Are There So Many Launch Files?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../8_help_center/issues.html">8.2. Issue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../9_license/license.html">9. License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OrbbecSDK ROS2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Build the package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/source/temp/build_the_package.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="build-the-package">
+<h1>Build the package<a class="headerlink" href="#build-the-package" title="Link to this heading"></a></h1>
+<section id="installation-instructions">
+<h2>Installation Instructions<a class="headerlink" href="#installation-instructions" title="Link to this heading"></a></h2>
+<p>Install ROS 2</p>
+<ul class="simple">
+<li><p>Please refer to the
+official <a class="reference external" href="https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html">ROS 2 installation guide</a>
+guidance</p></li>
+</ul>
+<blockquote>
+<div><p>If your ROS 2 command does not auto-complete, put the following two lines into your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>
+or <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code></p>
+</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>register-python-argcomplete3<span class="w"> </span>ros2<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>register-python-argcomplete3<span class="w"> </span>colcon<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Create <code class="docutils literal notranslate"><span class="pre">colcon</span></code> workspace</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+</pre></div>
+</div>
+<p>Get source code</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/orbbec/OrbbecSDK_ROS2.git
+</pre></div>
+</div>
+<p>Install deb dependencies</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># assume you have sourced ROS environment, same blow</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libgflags-dev<span class="w"> </span>nlohmann-json3-dev<span class="w">  </span><span class="se">\</span>
+ros-<span class="nv">$ROS_DISTRO</span>-image-transport<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-image-publisher<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-camera-info-manager<span class="w"> </span><span class="se">\</span>
+ros-<span class="nv">$ROS_DISTRO</span>-diagnostic-updater<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-diagnostic-msgs<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-statistics-msgs<span class="w"> </span><span class="se">\</span>
+ros-<span class="nv">$ROS_DISTRO</span>-backward-ros<span class="w"> </span>libdw-dev
+</pre></div>
+</div>
+<p>Install udev rules.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w">  </span>~/ros2_ws/src/OrbbecSDK_ROS2/orbbec_camera/scripts
+sudo<span class="w"> </span>bash<span class="w"> </span>install_udev_rules.sh
+sudo<span class="w"> </span>udevadm<span class="w"> </span>control<span class="w"> </span>--reload-rules<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>udevadm<span class="w"> </span>trigger
+</pre></div>
+</div>
+</section>
+<section id="getting-start">
+<h2>Getting start<a class="headerlink" href="#getting-start" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+<span class="c1"># build release, Default is Debug</span>
+colcon<span class="w"> </span>build<span class="w"> </span>--event-handlers<span class="w">  </span>console_direct+<span class="w">  </span>--cmake-args<span class="w">  </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</pre></div>
+</div>
+<p>Launch camera node</p>
+<ul class="simple">
+<li><p>On terminal 1</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./install/setup.bash
+ros2<span class="w"> </span>launch<span class="w"> </span>orbbec_camera<span class="w"> </span>astra.launch.py<span class="w"> </span><span class="c1"># or other launch file, see below table</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>On terminal 2</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./install/setup.bash
+rviz2
+</pre></div>
+</div>
+<p>Select the topic you want to display</p>
+<ul class="simple">
+<li><p>List topics / services/ parameters ( on terminal 3)</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>list
+ros2<span class="w"> </span>service<span class="w"> </span>list
+ros2<span class="w"> </span>param<span class="w"> </span>list
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Get device info</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/get_device_info<span class="w"> </span>orbbec_camera_msgs/srv/GetDeviceInfo<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Get SDK version</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/get_sdk_version<span class="w"> </span>orbbec_camera_msgs/srv/GetString<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Get exposure</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/get_color_exposure<span class="w"> </span>orbbec_camera_msgs/srv/GetInt32<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>If your check <code class="docutils literal notranslate"><span class="pre">ir</span></code> or <code class="docutils literal notranslate"><span class="pre">depth</span></code>, please change <code class="docutils literal notranslate"><span class="pre">/camera/get_color_exposure</span></code>
+to <code class="docutils literal notranslate"><span class="pre">/camera/get_ir_exposure</span></code> or <code class="docutils literal notranslate"><span class="pre">/camera/get_depth_exposure</span></code>, Same below.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Get gain</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/get_color_gain<span class="w"> </span>orbbec_camera_msgs/srv/GetInt32<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Get white balance</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/get_white_balance<span class="w"> </span>orbbec_camera_msgs/srv/GetInt32<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Set auto exposure</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_color_auto_exposure<span class="w"> </span>std_srvs/srv/SetBool<span class="w"> </span><span class="s1">&#39;{data: false}&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Set white balance</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_white_balance<span class="w"> </span>orbbec_camera_msgs/srv/SetInt32<span class="w"> </span><span class="s1">&#39;{data: 4600}&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Set laser enable</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w">  </span>/camera/set_laser_enable<span class="w"> </span>std_srvs/srv/SetBool<span class="w"> </span><span class="s2">&quot;{data: true}&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>toggle sensor</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/toggle_ir<span class="w"> </span>std_srvs/srv/SetBool<span class="w"> </span><span class="s2">&quot;{data : true}&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>save point cloud</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/save_point_cloud<span class="w"> </span>std_srvs/srv/Empty<span class="w"> </span><span class="s2">&quot;{}&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="efficient-intra-process-communication">
+<h2>Efficient intra-process communication:<a class="headerlink" href="#efficient-intra-process-communication" title="Link to this heading"></a></h2>
+<p>Our ROS2 Wrapper node supports zero-copy communications if loaded in the same process as a subscriber node. This can reduce copy times on ../image/pointcloud topics, especially with big frame resolutions and high FPS.</p>
+<p>You will need to launch a component container and launch our node as a component together with other component nodes. Further details on “Composing multiple nodes in a single process” can be found <a class="reference external" href="https://docs.ros.org/en/rolling/Tutorials/Composition.html">here</a>.</p>
+<p>Further details on efficient intra-process communication can be found <a class="reference external" href="https://docs.ros.org/en/humble/Tutorials/Intra-Process-Communication.html#efficient-intra-process-communication">here</a>.</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<section id="manually-loading-multiple-components-into-the-same-process">
+<h4>Manually loading multiple components into the same process<a class="headerlink" href="#manually-loading-multiple-components-into-the-same-process" title="Link to this heading"></a></h4>
+<ul>
+<li><p>Start the component:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>rclcpp_components<span class="w"> </span>component_container
+</pre></div>
+</div>
+</li>
+<li><p>Add the wrapper:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>component<span class="w"> </span>load<span class="w"> </span>/ComponentManager<span class="w"> </span>orbbec_camera<span class="w"> </span>orbbec_camera::OBCameraNodeDriver<span class="w"> </span>-e<span class="w"> </span>use_intra_process_comms:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>Load other component nodes (consumers of the wrapper topics) in the same way.</p>
+</li>
+</ul>
+</section>
+<section id="using-a-launch-file">
+<h4>Using a launch file<a class="headerlink" href="#using-a-launch-file" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>orbbec_camera<span class="w"> </span>gemini_intra_process_demo_launch.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Node components are currently not supported on RCLPY</p></li>
+<li><p>Compressed images using <code class="docutils literal notranslate"><span class="pre">image_transport</span></code> will be disabled as this isn’t supported with intra-process communication</p></li>
+</ul>
+</section>
+</section>
+<section id="use-v4l2-backend">
+<h2>Use V4L2 backend<a class="headerlink" href="#use-v4l2-backend" title="Link to this heading"></a></h2>
+<p>To enable the V4L2 backend for the Gemini2 series cameras, follow these steps:</p>
+<ol class="simple">
+<li><p>The Gemini2 series cameras support the V4L2 backend.</p></li>
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">config/OrbbecSDKConfig_v1.0.xml</span></code> file.</p></li>
+<li><p>Set the navigation option to <code class="docutils literal notranslate"><span class="pre">LinuxUVCBackend</span></code>.</p></li>
+<li><p>Change the backend setting to <code class="docutils literal notranslate"><span class="pre">V4L2</span></code>.</p></li>
+</ol>
+<p>Note: The V4L2 backend is not enabled by default.</p>
+</section>
+<section id="launch-parameters">
+<h2>Launch parameters<a class="headerlink" href="#launch-parameters" title="Link to this heading"></a></h2>
+<p>The following are the launch parameters available:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_delay</span></code>: The delay time in milliseconds for reopening the device. Some devices, such as Astra mini, require
+a longer time to initialize and reopening the device immediately can cause firmware crashes when hot plugging.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_point_cloud</span></code>: Enables the point cloud.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_colored_point_cloud</span></code>: Enables the RGB point cloud.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">point_cloud_qos</span></code>, <code class="docutils literal notranslate"><span class="pre">[color|depth|ir]_qos</span></code>, <code class="docutils literal notranslate"><span class="pre">[color|depth|ir]_camera_info_qos</span></code>: ROS 2 Message Quality of Service (QoS)
+settings. The possible values
+are <code class="docutils literal notranslate"><span class="pre">SYSTEM_DEFAULT</span></code>, <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code>, <code class="docutils literal notranslate"><span class="pre">PARAMETER_EVENTS</span></code>, <code class="docutils literal notranslate"><span class="pre">SERVICES_DEFAULT</span></code>, <code class="docutils literal notranslate"><span class="pre">PARAMETERS</span></code>, <code class="docutils literal notranslate"><span class="pre">SENSOR_DATA</span></code> and are
+case-insensitive. These correspond
+to <code class="docutils literal notranslate"><span class="pre">rmw_qos_profile_system_default</span></code>, <code class="docutils literal notranslate"><span class="pre">rmw_qos_profile_default</span></code>, <code class="docutils literal notranslate"><span class="pre">rmw_qos_profile_parameter_events</span></code>, <code class="docutils literal notranslate"><span class="pre">rmw_qos_profile_services_default</span></code>, <code class="docutils literal notranslate"><span class="pre">rmw_qos_profile_parameters</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">SENSOR_DATA</span></code>, respectively.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_d2c_viewer</span></code>: Publishes the D2C overlay image (for testing only).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device_num</span></code>: The number of devices. This must be filled in if multiple cameras are required.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">color_width</span></code>, <code class="docutils literal notranslate"><span class="pre">color_height</span></code>, <code class="docutils literal notranslate"><span class="pre">color_fps</span></code>: The resolution and frame rate of the color stream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ir_width</span></code>, <code class="docutils literal notranslate"><span class="pre">ir_height</span></code>, <code class="docutils literal notranslate"><span class="pre">ir_fps</span></code>: The resolution and frame rate of the IR stream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">depth_width</span></code>, <code class="docutils literal notranslate"><span class="pre">depth_height</span></code>, <code class="docutils literal notranslate"><span class="pre">depth_fps</span></code>: The resolution and frame rate of the depth stream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_color</span></code>: Enables the RGB camera.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_depth</span></code>: Enables the depth camera.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_ir</span></code>: Enables the IR camera.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">depth_registration</span></code>: Enables alignment of the depth frame to the color frame. This field is required when
+the <code class="docutils literal notranslate"><span class="pre">enable_colored_point_cloud</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">usb_port</span></code>: The USB port of the camera. This is required when multiple cameras are used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_accel</span></code>: Enables the accelerometer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">accel_rate</span></code>: The frequency of the accelerometer, the optional values
+are <code class="docutils literal notranslate"><span class="pre">1.5625hz</span></code>, <code class="docutils literal notranslate"><span class="pre">3.125hz</span></code>, <code class="docutils literal notranslate"><span class="pre">6.25hz</span></code>, <code class="docutils literal notranslate"><span class="pre">12.5hz</span></code>, <code class="docutils literal notranslate"><span class="pre">25hz</span></code>, <code class="docutils literal notranslate"><span class="pre">50hz</span></code>, <code class="docutils literal notranslate"><span class="pre">100hz</span></code>, <code class="docutils literal notranslate"><span class="pre">200hz</span></code>, <code class="docutils literal notranslate"><span class="pre">500hz</span></code>, <code class="docutils literal notranslate"><span class="pre">1khz</span></code>, <code class="docutils literal notranslate"><span class="pre">2khz</span></code>, <code class="docutils literal notranslate"><span class="pre">4khz</span></code>, <code class="docutils literal notranslate"><span class="pre">8khz</span></code>, <code class="docutils literal notranslate"><span class="pre">16khz</span></code>, <code class="docutils literal notranslate"><span class="pre">32khz</span></code>.
+The specific value depends on the current camera.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">accel_range</span></code>: The range of the accelerometer, the optional values are <code class="docutils literal notranslate"><span class="pre">2g</span></code>, <code class="docutils literal notranslate"><span class="pre">4g</span></code>, <code class="docutils literal notranslate"><span class="pre">8g</span></code>, <code class="docutils literal notranslate"><span class="pre">16g</span></code>. The specific value
+depends on the current camera.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_gyro</span></code>: Enables the gyroscope.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gyro_rate</span></code>: The frequency of the gyroscope, the optional values
+are <code class="docutils literal notranslate"><span class="pre">1.5625hz</span></code>, <code class="docutils literal notranslate"><span class="pre">3.125hz</span></code>, <code class="docutils literal notranslate"><span class="pre">6.25hz</span></code>, <code class="docutils literal notranslate"><span class="pre">12.5hz</span></code>, <code class="docutils literal notranslate"><span class="pre">25hz</span></code>, <code class="docutils literal notranslate"><span class="pre">50hz</span></code>, <code class="docutils literal notranslate"><span class="pre">100hz</span></code>, <code class="docutils literal notranslate"><span class="pre">200hz</span></code>, <code class="docutils literal notranslate"><span class="pre">500hz</span></code>, <code class="docutils literal notranslate"><span class="pre">1khz</span></code>, <code class="docutils literal notranslate"><span class="pre">2khz</span></code>, <code class="docutils literal notranslate"><span class="pre">4khz</span></code>, <code class="docutils literal notranslate"><span class="pre">8khz</span></code>, <code class="docutils literal notranslate"><span class="pre">16khz</span></code>, <code class="docutils literal notranslate"><span class="pre">32khz</span></code>.
+The specific value depends on the current camera.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gyro_range</span></code>: The range of the gyroscope, the optional values
+are <code class="docutils literal notranslate"><span class="pre">16dps</span></code>, <code class="docutils literal notranslate"><span class="pre">31dps</span></code>, <code class="docutils literal notranslate"><span class="pre">62dps</span></code>, <code class="docutils literal notranslate"><span class="pre">125dps</span></code>, <code class="docutils literal notranslate"><span class="pre">250dps</span></code>, <code class="docutils literal notranslate"><span class="pre">500dps</span></code>, <code class="docutils literal notranslate"><span class="pre">1000dps</span></code>, <code class="docutils literal notranslate"><span class="pre">2000dps</span></code>. The specific value depends on the
+current camera.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enumerate_net_device</span></code>: Enables the function of enumerating network devices. True means enabled, false means disabled.
+This feature is only supported by Femto Mega and Gemini 2 XL devices. When accessing these devices through the
+network, the IP address of the device needs to be configured in advance. The enable switch needs to be set to true.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">depth_filter_config</span></code>: Configures the loading path for the depth filtering configuration file. By default, the depth
+filtering configuration file is located in the /config/depthfilter directory. Supported only on Gemini2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">depth_precision</span></code>: The depth precision should be in the format <code class="docutils literal notranslate"><span class="pre">1mm</span></code>. The default value is <code class="docutils literal notranslate"><span class="pre">1mm</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_laser</span></code>: Enables the laser. The default value is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">laser_on_off_mode</span></code>: Laser on/off alternate mode, 0: off, 1: on-off alternate, 2: off-on alternate. The default value
+is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device_preset</span></code>: The default value is <code class="docutils literal notranslate"><span class="pre">Default</span></code>. Only the G330 series is supported. For more information, refer to
+the <a class="reference external" href="https://www.orbbec.com/docs/g330-use-depth-presets/">G330 documentation</a>. Please refer to the table below to set
+the <code class="docutils literal notranslate"><span class="pre">device_preset</span></code> value based on your use case. The value should be one of the preset names
+listed <a class="reference external" href="#predefined-presets">in the table</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_decimation_filter</span></code>: This filter effectively reduces the depth scene complexity. The filter runs on kernel
+sizes [2x2] to [8x8] pixels. The image size is scaled down proportionally in both dimensions to preserve the aspect
+ratio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_hdr_merge</span></code>: This filter is used jointly with the depth HDR function. By merging consecutive depth images of
+alternating exposure values, we can overcome challenges in acquiring depth values for under-illuminated and
+over-illuminated objects simultaneously.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_sequence_id_filter</span></code>: This filter is used jointly with the depth HDR function and outputs only the sequence
+with the specified sequence ID.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_threshold_filter</span></code>: This filter preserves depth values of interest and omits depth values out of scope.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_noise_removal_filter</span></code>: This filter removes speckle noise in clusters and gives rise to a less-filled depth
+map.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_spatial_filter</span></code>: This filter performs multiple iterations of processing as specified by the magnitude
+parameter to enhance the smoothness of depth data. It is also capable of filling small holes in depth maps.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_temporal_filter</span></code>: This filter is intended to improve the depth data persistency by manipulating per-pixel
+values based on previous frames. The filter performs a single pass on the data, adjusting the depth values while also
+updating the tracking history.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_hole_filling_filter</span></code>: This filter fills all holes in the depth map using the specified mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">retry_on_usb3_detection_failure</span></code>: If the camera is connected to a USB 2.0 port and is not detected, the system will
+attempt to reset the camera up to three times. This setting aims to prevent USB 3.0 devices from being incorrectly
+recognized as USB 2.0. It is recommended to set this parameter to <code class="docutils literal notranslate"><span class="pre">false</span></code> when using a USB 2.0 connection to avoid
+unnecessary resets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_3d_reconstruction_mode</span></code>: Enables 3D reconstruction mode. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>. When set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the camera
+laser operates in on-off mode, capturing IR images (laser off) for VSLAM localization and depth images (laser on) for point cloud computation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tf_publish_rate</span></code>: The rate at which the camera publishes dynamic transforms. The default value is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, which means static transforms are published.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_domain</span></code>: The frame time domain, string type, can be <code class="docutils literal notranslate"><span class="pre">device</span></code>, <code class="docutils literal notranslate"><span class="pre">global</span></code>, or <code class="docutils literal notranslate"><span class="pre">system</span></code>. <code class="docutils literal notranslate"><span class="pre">device</span></code> means using the hardware timestamp from the camera,
+<code class="docutils literal notranslate"><span class="pre">system</span></code> means using the timestamp when the PC received the first packet of data or frame, and <code class="docutils literal notranslate"><span class="pre">global</span></code> is used for synchronized time across multiple
+devices, aligning data from different sources to a common time base.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_sync_host_time</span></code>: Enables synchronization of the host time with the camera time. The default value is <code class="docutils literal notranslate"><span class="pre">true</span></code>, if
+use global time, set to <code class="docutils literal notranslate"><span class="pre">false</span></code>. Some old devices may not support this feature.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_file_path</span></code>: The path to the YAML configuration file. The default value is <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>. If the configuration file is not specified,
+the default parameters from the launch file will be used. If you want to use a custom configuration file, please refer to <code class="docutils literal notranslate"><span class="pre">gemini_330_series.launch.py</span></code>.
+<code class="docutils literal notranslate"><span class="pre">enable_heartbeat</span></code> enables the heartbeat function, which is set to <code class="docutils literal notranslate"><span class="pre">false</span></code> by default. If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the camera node will send heartbeat signals to
+the firmware, and if hardware logging is desired, it should also be set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log_level</span></code> : SDK log level, the default value is <code class="docutils literal notranslate"><span class="pre">info</span></code>, the optional values are <code class="docutils literal notranslate"><span class="pre">debug</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">warn</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">fatal</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enable_color_undistortion</span></code>: Enables color undistortion, the default value is <code class="docutils literal notranslate"><span class="pre">false</span></code>. Note that our color cameras exhibit minimal distortion, and typically, undistortion is not necessary.</p></li>
+</ul>
+<p><strong>IMPORTANT</strong>: <em>Please carefully read the instructions regarding software filtering settings
+at <a class="reference external" href="https://www.orbbec.com/docs/g330-use-depth-post-processing-blocks/">this link</a>. If you are uncertain, do not modify
+these settings.</em></p>
+</section>
+<section id="predefined-presets">
+<h2>Predefined presets<a class="headerlink" href="#predefined-presets" title="Link to this heading"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Preset</th>
+<th>Features</th>
+<th>Recommended use cases</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default</td>
+<td>- Best visual perception``- Overall good performance in accuracy, fill rate, tiny objects, etc.</td>
+<td>- Generic <code>&lt;br&gt;</code>- Robotics</td>
+</tr>
+<tr>
+<td>Hand</td>
+<td>- Clear hand and finger edges</td>
+<td>- Gesture recognition</td>
+</tr>
+<tr>
+<td>High Accuracy</td>
+<td>- Depth of high confidence <code>&lt;br&gt;</code>- Barely noise depth values <code>&lt;br&gt;</code>- Lower fill rate</td>
+<td>- Collision avoidance <code>&lt;br&gt;</code>- Object scanning</td>
+</tr>
+<tr>
+<td>High Density</td>
+<td>- Higher fill rate <code>&lt;br&gt;</code>- More tiny objects <code>&lt;br&gt;</code>- May suffer from noise depth values</td>
+<td>- Object recognition <code>&lt;br&gt;</code>- Pick &amp; place <code>&lt;br&gt;</code>- Foreground &amp; background animation</td>
+</tr>
+<tr>
+<td>Medium Density</td>
+<td>- Balanced performance in fill rate and accuracy <code>&lt;br&gt;</code>- In comparison to Default: lower fill rate, better edge quality</td>
+<td>- Generic and alternative to Default</td>
+</tr>
+<tr>
+<td>Custom</td>
+<td>- User defined Preset <code>&lt;br&gt;</code>- Derived from Presets above, with customized modifications, e.g. a new configuration for the post-processing pipeline, modified mean intensity set point of depth AE function, etc.</td>
+<td>- Better depth performance achieved using customized configurations in comparison to using predefined presets <code>&lt;br&gt;</code>- For well-established custom configurations</td>
+</tr>
+</tbody>
+</table><p>Choose the appropriate preset name based on your specific use case and set it as the value for the <code class="docutils literal notranslate"><span class="pre">device_preset</span></code>
+parameter.</p>
+</section>
+<section id="depth-work-mode-switch">
+<h2>Depth work mode switch<a class="headerlink" href="#depth-work-mode-switch" title="Link to this heading"></a></h2>
+<p>OrbbecSDK_ROS2 supports the depth work mode switch. The depth work mode switch is supported by Gemini 2, Gemini 2 L,
+and Femto and Femto Bolt cameras.</p>
+<ul class="simple">
+<li><p>Before starting the camera, depth work mode (depth_work_mode) can be configured for the corresponding xxx.launch.py
+file’s support.</p></li>
+<li><p>The depth work mode switch is supported by Gemini 2, Gemini 2 L, and Gemini 2 XL cameras.</p></li>
+<li><p>The default depth work mode configuration of xxx.launch.py is the camera’s default configuration. If you need to
+modify it, you can switch to the corresponding mode as needed.</p></li>
+<li><p>The specific camera depth work mode support types can be found in the comments of the depth mode.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Depth work mode support is as follows:</span>
+<span class="c1"># Unbinned Dense Default</span>
+<span class="c1"># Unbinned Sparse Default</span>
+<span class="c1"># Binned Sparse Default</span>
+<span class="c1"># Obstacle Avoidance</span>
+<span class="n">DeclareLaunchArgument</span><span class="p">(</span><span class="s1">&#39;depth_work_mode&#39;</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>View depth work modes:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>orbbec_camera<span class="w"> </span>list_depth_work_mode_node
+</pre></div>
+</div>
+</section>
+<section id="configuration-of-depth-nfov-and-wfov-modes">
+<h2>Configuration of depth NFOV and WFOV modes<a class="headerlink" href="#configuration-of-depth-nfov-and-wfov-modes" title="Link to this heading"></a></h2>
+<p>For the Femto Mega and Femto Bolt devices, the NFOV and WFOV modes are implemented by configuring the resolution of
+Depth and IR in the launch file.
+In launch file, depth_width、depth_height、ir_width、ir_height represents the resolution of the depth and the resolution of
+the IR.
+The frame fps and resolution of IR must be consistent with the depth. The correspondence between different modes and
+resolutions is as follows:</p>
+<ul class="simple">
+<li><p>NFOV unbinned: 640 x 576.</p></li>
+<li><p>NFOV binned: 320 x 288.</p></li>
+<li><p>WFOV unbinned: 1024 x 1024.</p></li>
+<li><p>WFOV binned: 512 x 512.</p></li>
+</ul>
+</section>
+<section id="network-device-enumeration">
+<h2>Network device enumeration<a class="headerlink" href="#network-device-enumeration" title="Link to this heading"></a></h2>
+<p>Currently, the network device enumeration function is supported only by the Femto Mega device. When accessing this
+device over the network, if <code class="docutils literal notranslate"><span class="pre">enumerate_net_device</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the device will be automatically enumerated,
+eliminating the need to configure the IP address in advance or set the enable switch to true. The specific configuration
+methods are as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enumerate_net_device</span></code>: enumeration network device automatically, only supported by Femto Mega.
+if <code class="docutils literal notranslate"><span class="pre">enumerate_net_device</span></code> set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the device will be enumerated automatically,No need to set
+the <code class="docutils literal notranslate"><span class="pre">net_device_ip</span></code>
+and <code class="docutils literal notranslate"><span class="pre">net_device_port</span></code> parameters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">net_device_ip</span></code>: The IP address of the device.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">net_device_port</span></code>: The port number of the device.</p></li>
+</ul>
+<p>Building a Debian Package</p>
+<section id="preparing-the-environment">
+<h3>Preparing the Environment<a class="headerlink" href="#preparing-the-environment" title="Link to this heading"></a></h3>
+<p>Before starting, install the required tools:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>debhelper<span class="w"> </span>fakeroot<span class="w"> </span>python3-bloom
+</pre></div>
+</div>
+</section>
+<section id="configuring-ros-dependencies">
+<h3>Configuring ROS Dependencies<a class="headerlink" href="#configuring-ros-dependencies" title="Link to this heading"></a></h3>
+<p>Add the following YAML file to your system at <code class="docutils literal notranslate"><span class="pre">/etc/ros/rosdep/sources.list.d/00-orbbec.yaml</span></code>. Make sure to
+replace <code class="docutils literal notranslate"><span class="pre">focal</span></code> with the codename of your Ubuntu version and <code class="docutils literal notranslate"><span class="pre">humble</span></code> with your ROS2 distribution name:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">orbbec_camera_msgs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ubuntu</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">focal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">ros-humble-orbbec-camera-msgs</span><span class="w"> </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Next, create a new file <code class="docutils literal notranslate"><span class="pre">/etc/ros/rosdep/sources.list.d/50-orbbec.list</span></code> and add this line to specify the path to the
+YAML file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yaml<span class="w"> </span>file:///etc/ros/rosdep/sources.list.d/00-orbbec.yaml
+</pre></div>
+</div>
+<p>Update the rosdep database to reflect these changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>update
+</pre></div>
+</div>
+</section>
+<section id="building-the-package">
+<h3>Building the Package<a class="headerlink" href="#building-the-package" title="Link to this heading"></a></h3>
+<p>Navigate to your workspace and build the project:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+colcon<span class="w"> </span>build<span class="w"> </span>--event-handlers<span class="w"> </span>console_direct+<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+.<span class="w"> </span>install/setup.bash
+<span class="nb">cd</span><span class="w"> </span>src/OrbbecSDK_ROS2/
+bash<span class="w"> </span>.make_deb.sh
+</pre></div>
+</div>
+</section>
+</section>
+<section id="launch-files">
+<h2>Launch files<a class="headerlink" href="#launch-files" title="Link to this heading"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>product serials</th>
+<th>launch file</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>astra+</td>
+<td>astra_adv.launch.py</td>
+</tr>
+<tr>
+<td>astra mini /astra mini pro /astra pro</td>
+<td>astra.launch.py</td>
+</tr>
+<tr>
+<td>astra mini pro s</td>
+<td>astra.launch.py</td>
+</tr>
+<tr>
+<td>astra2</td>
+<td>astra2.launch.py</td>
+</tr>
+<tr>
+<td>astra stereo s</td>
+<td>stereo_s_u3.launch.py</td>
+</tr>
+<tr>
+<td>astra pro2</td>
+<td>astra_pro2.launch.py</td>
+</tr>
+<tr>
+<td>dabai</td>
+<td>dabai.launch.py</td>
+</tr>
+<tr>
+<td>dabai d1</td>
+<td>dabai_d1.launch.py</td>
+</tr>
+<tr>
+<td>dabai dcw</td>
+<td>dabai_dcw.launch.py</td>
+</tr>
+<tr>
+<td>dabai dw</td>
+<td>dabai_dw.launch.py</td>
+</tr>
+<tr>
+<td>dabai pro</td>
+<td>dabai_pro.launch.py</td>
+</tr>
+<tr>
+<td>deeya</td>
+<td>deeya.launch.py</td>
+</tr>
+<tr>
+<td>femto /femto w</td>
+<td>femto.launch.py</td>
+</tr>
+<tr>
+<td>femto mega</td>
+<td>femto_mega.launch.py</td>
+</tr>
+<tr>
+<td>femto bolt</td>
+<td>femto_bolt.launch.py</td>
+</tr>
+<tr>
+<td>gemini</td>
+<td>gemini.launch.py</td>
+</tr>
+<tr>
+<td>gemini</td>
+<td>gemini.launch.py</td>
+</tr>
+<tr>
+<td>gemini2 / dabai DCL</td>
+<td>gemini2.launch.py</td>
+</tr>
+<tr>
+<td>gemini2L</td>
+<td>gemini2L.launch.py</td>
+</tr>
+<tr>
+<td>gemini e</td>
+<td>gemini_e.launch.py</td>
+</tr>
+<tr>
+<td>gemini e lite</td>
+<td>gemini_e_lite.launch.py</td>
+</tr>
+<tr>
+<td>dabai max</td>
+<td>dabai_max.launch.py</td>
+</tr>
+<tr>
+<td>dabai max pro</td>
+<td>dabai_max_pro.launch.py</td>
+</tr>
+<tr>
+<td>gemini uw</td>
+<td>gemini_uw.launch.py</td>
+</tr>
+<tr>
+<td>dabai dcw2</td>
+<td>dabai_dcw2.launch.py</td>
+</tr>
+<tr>
+<td>dabai dw2</td>
+<td>dabai_dw2.launch.py</td>
+</tr>
+<tr>
+<td>gemini ew</td>
+<td>gemini_ew.launch.py</td>
+</tr>
+<tr>
+<td>gemini ew lite</td>
+<td>gemini_ew_lite.launch.py</td>
+</tr>
+<tr>
+<td>gemini 330 series</td>
+<td>gemini_330_series.launch.py</td>
+</tr>
+</tbody>
+</table><p>**All launch files are essentially similar, with the primary difference being the default values of the parameters set
+for different models
+within the same series. Differences in USB standards, such as USB 2.0 versus USB 3.0, may require adjustments to these
+parameters. If you
+encounter a startup failure, please carefully review the specification manual. Pay special attention to the resolution
+settings in the launch
+file, as well as other parameters, to ensure compatibility and optimal performance.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ORBBEC INC. www.orbbec.com.cn.
+      <span class="lastupdated">Last updated on 2024-11-04 14:58:37.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

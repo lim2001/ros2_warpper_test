@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.1. Build the package &mdash; OrbbecSDK ROS2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=b37f6b4d" />
+
+  
+    <link rel="shortcut icon" href="../../_static/web_html_logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.2. Package description" href="package_description.html" />
+    <link rel="prev" title="2. Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            OrbbecSDK ROS2
+              <img src="../../_static/orbbec-light_no_colour.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Application Document</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1_overview/overview.html">1. Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_overview/typical_applications.html">1.1. Typical applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_overview/supported_cameras.html">1.2. Supported cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_overview/supported_platforms.html">1.3. Supported platforms</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="installation.html">2. Installation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. Build the package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-source-code-of-orbbecsdk-ros2">2.1.1. Get source code of OrbbecSDK_ROS2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-environment">2.1.2. Install Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#common-configurations">2.1.3. Common Configurations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#use-v4l2-backend">2.1.3.1. Use V4L2 backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#predefined-presets">2.1.3.2. Predefined presets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#depth-work-mode-switch">2.1.3.3. Depth work mode switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-of-depth-nfov-and-wfov-modes">2.1.3.4. Configuration of depth NFOV and WFOV modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#network-device-enumeration">2.1.3.5. Network device enumeration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compressed-image">2.1.3.6. Compressed Image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#build-project">2.1.4. Build project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-debian-package">2.1.5. Building a Debian Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="package_description.html">2.2. Package  description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="package_description.html#all-available-topics">2.2.1. All available topics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="package_description.html#all-available-services">2.2.2. All available services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="package_description.html#launch">2.2.3. Launch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="package_description.html#yaml-files">2.2.4. YAML files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="package_description.html#coordinate-systems">2.2.5. Coordinate Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="package_description.html#ros2-robot-vs-optical-camera-coordination-systems">2.2.5.1. ROS2(Robot) vs Optical(Camera) Coordination Systems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package_description.html#camera-sensor-structure">2.2.5.2. Camera sensor structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package_description.html#tf-from-coordinate-a-to-coordinate-b">2.2.5.3. TF from coordinate A to coordinate B:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html">3. Start single camera</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#id1">3.1. Start single camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#visualizing-data-in-rviz2">3.2. Visualizing Data in RViz2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#display-view-topics-service">3.3. Display view topics service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#example-visualizations">3.4. Example Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_start_single_camera/start_single_camera.html#tf-tree-diagram">3.5. TF tree diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html">4. Start multiple cameras</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#identifying-camera-usb-ports">4.1. Identifying Camera USB Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#list-connected-cameras">4.2. List Connected Cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#launching-multiple-cameras">4.3. Launching Multiple Cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#setup-for-multiple-camera-launch">4.4. Setup for Multiple Camera Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#running-the-launch-file">4.5. Running the Launch File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#configuring-the-tf-tree-for-multiple-cameras">4.6. Configuring the TF Tree for Multiple Cameras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_start_multi_camera/start_multi_camera.html#example-tf-configuration-for-two-cameras">4.7. Example TF Configuration for Two Cameras</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../5_robot_integrations/robot_integra.html">5. Robot Intergrations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_robot_integrations/robot_integrations.html">5.1. Robot integrations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../5_robot_integrations/robot_integrations.html#example-1">5.1.1. Example 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../5_robot_integrations/robot_integrations.html#example2">5.1.2. Example2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../6_advanced/advanced.html">6. Advanced</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/multi_camera_sync.html">6.1. Multi camera sync</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#preparation">6.1.1. Preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#check-the-camera-usb-port">6.1.2. Check the camera usb port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#configure-multi-camera-synced-launch-py">6.1.3. Configure multi_camera_synced.launch.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#run-multi-camera-synced-launch-py">6.1.4. Run multi_camera_synced.launch.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#advanced-parameters">6.1.5. Advanced Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/multi_camera_sync.html#gmsl-example">6.1.6. Gmsl example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/component_node.html">6.2. Component node</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/component_node.html#creating-a-component-node">6.2.1. Creating a Component Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/component_node.html#loading-a-single-node-into-a-component-container">6.2.2. Loading a Single Node into a Component Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/component_node.html#loading-a-launch-py-into-a-component-container">6.2.3. Loading a launch.py into a Component Container</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/zero_copy.html">6.3. Zero-copy communications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#efficient-intra-process-communication">6.3.1. Efficient intra-process communication:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#example">6.3.2. Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#manually-loading-multiple-components-into-the-same-process">6.3.3. Manually loading multiple components into the same process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#using-a-launch-file">6.3.4. Using a launch file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/zero_copy.html#limitations">6.3.5. Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/gdb_debug.html">6.4. GDB debug</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#compile-the-program-with-debug-information">6.4.1. Compile the program with debug information:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#start-the-node-with-gdb">6.4.2. Start the node with GDB:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#configure-gdb-in-a-launch-file">6.4.3. Configure GDB in a launch file:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#use-gdb-for-debugging">6.4.4. Use GDB for debugging:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#set-up-linux-to-produce-core-files">6.4.5. Set up Linux to produce core files:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#use-vs-code-for-debugging">6.4.6. Use VS Code for debugging:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#use-the-backward-ros-package">6.4.7. Use the backward_ros package:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/gdb_debug.html#use-xterm-terminal-to-open-gdb-debugging">6.4.8. Use xterm terminal to open gdb debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/backward_ros.html">6.5. Backward ros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#add-backward-ros-as-a-dependency">6.5.1. Add <code class="docutils literal notranslate"><span class="pre">backward_ros</span></code> as a dependency:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#configure-cmakelists-txt">6.5.2. Configure <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#build-your-project-with-debug-information">6.5.3. Build your project with debug information:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#run-your-node">6.5.4. Run your node:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/backward_ros.html#example">6.5.5. Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/benchmark.html">6.6. Benchmark</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/benchmark.html#launch-orbbec-camera-node">6.6.1. Launch Orbbec Camera Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/benchmark.html#use-benchmark-tools">6.6.2. Use Benchmark Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/benchmark.html#configure-and-run-benchmark">6.6.3. Configure and Run Benchmark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/benchmark.html#analyze-results">6.6.4. Analyze Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../6_advanced/fastdds_tuning.html">6.7. Fast DDS Tuning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#adjusting-system-parameters">6.7.1. Adjusting System Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#ip-fragmentation-time">6.7.1.1. IP Fragmentation Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#ip-fragmentation-memory-threshold">6.7.1.2. IP Fragmentation Memory Threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#maximum-buffer-sizes">6.7.1.3. Maximum Buffer Sizes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#fast-dds-configuration">6.7.2. 2. Fast DDS Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#configuration-file-shm-fastdds-xml">6.7.2.1. Configuration File: <code class="docutils literal notranslate"><span class="pre">shm_fastdds.xml</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../6_advanced/fastdds_tuning.html#environment-variables">6.7.2.2. Environment Variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../7_tools/tool.html">7. Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_tools/tools.html">7.1. Some practical tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#list-devices-node">7.1.1. list_devices_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#list-depth-work-mode-node">7.1.2. list_depth_work_mode_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#list-camera-profile-mode-node">7.1.3. list_camera_profile_mode_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#multi-save-rgbir-node">7.1.4. multi_save_rgbir_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#metadata-save-files-node">7.1.5. metadata_save_files_node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../7_tools/tools.html#metadata-export-files-node">7.1.6. metadata_export_files_node</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../8_help_center/help_center.html">8. Help Center</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8_help_center/FAQ.html">8.1. FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../8_help_center/FAQ.html#unexpected-crash">8.1.1. Unexpected Crash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../8_help_center/FAQ.html#no-data-stream-from-multiple-cameras">8.1.2. No Data Stream from Multiple Cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../8_help_center/FAQ.html#additional-troubleshooting">8.1.3. Additional Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../8_help_center/FAQ.html#why-are-there-so-many-launch-files">8.1.4. Why Are There So Many Launch Files?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../8_help_center/issues.html">8.2. Issue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../9_license/license.html">9. License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OrbbecSDK ROS2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="installation.html"><span class="section-number">2. </span>Installation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.1. </span>Build the package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/source/2_installation/build_the_package.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="build-the-package">
+<h1><span class="section-number">2.1. </span>Build the package<a class="headerlink" href="#build-the-package" title="Link to this heading"></a></h1>
+<p>This section provides a comprehensive guide to installing, compiling, and running the OrbbecSDK_ROS2, covering all necessary steps for setup.</p>
+<!-- TOC --><ul class="simple">
+<li><p>Contents:</p>
+<ul>
+<li><p><a class="reference external" href="#get-source-code-of-orbbecsdk-ros2">Get source code of OrbbecSDK_ROS2</a></p></li>
+<li><p><a class="reference external" href="#install-environment">Install Environment</a></p></li>
+<li><p><a class="reference external" href="#common-configurations">Common Configurations</a></p></li>
+<li><p><a class="reference external" href="#build-project">Build project</a></p></li>
+<li><p><a class="reference external" href="#building-a-debian-package">Building a Debian Package</a></p></li>
+</ul>
+</li>
+</ul>
+<!-- TOC --><p> </p>
+<hr class="docutils" />
+<section id="get-source-code-of-orbbecsdk-ros2">
+<h2><span class="section-number">2.1.1. </span>Get source code of OrbbecSDK_ROS2<a class="headerlink" href="#get-source-code-of-orbbecsdk-ros2" title="Link to this heading"></a></h2>
+<p><strong>Get source code from github:</strong>    <a class="reference external" href="https://github.com/orbbec/OrbbecSDK_ROS2">https://github.com/orbbec/OrbbecSDK_ROS2</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src<span class="w">        </span><span class="c1"># Create colcon workspace on your local disk</span>
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>v2-main<span class="w"> </span>https://github.com/orbbec/OrbbecSDK_ROS2.git<span class="w">        </span><span class="c1">#Get source code</span>
+</pre></div>
+</div>
+</section>
+<section id="install-environment">
+<h2><span class="section-number">2.1.2. </span>Install Environment<a class="headerlink" href="#install-environment" title="Link to this heading"></a></h2>
+<p><strong>Install ROS 2 environment</strong>, refer to the official documentation: <a class="reference external" href="https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html">ROS2 installation guide: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tips: If your ROS2 command does not auto-complete, put the following two lines into your `.bashrc` or `.zshrc`</span>
+
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>register-python-argcomplete3<span class="w"> </span>ros2<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>register-python-argcomplete3<span class="w"> </span>colcon<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p><strong>Install deb dependencies:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># assume you have sourced ROS environment, same blow</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libgflags-dev<span class="w"> </span>nlohmann-json3-dev<span class="w">  </span><span class="se">\</span>
+ros-<span class="nv">$ROS_DISTRO</span>-image-transport<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-image-publisher<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-camera-info-manager<span class="w"> </span><span class="se">\</span>
+ros-<span class="nv">$ROS_DISTRO</span>-diagnostic-updater<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-diagnostic-msgs<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-statistics-msgs<span class="w"> </span><span class="se">\</span>
+ros-<span class="nv">$ROS_DISTRO</span>-backward-ros<span class="w"> </span>libdw-dev<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-image-transport<span class="w"> </span><span class="se">\</span>
+ros-<span class="nv">$ROS_DISTRO</span>-image-transport-plugins<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-compressed-image-transport
+</pre></div>
+</div>
+<p><strong>Install udev rules:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w">  </span>~/ros2_ws/src/OrbbecSDK_ROS2/orbbec_camera/scripts
+sudo<span class="w"> </span>bash<span class="w"> </span>install_udev_rules.sh
+sudo<span class="w"> </span>udevadm<span class="w"> </span>control<span class="w"> </span>--reload-rules<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>udevadm<span class="w"> </span>trigger
+</pre></div>
+</div>
+<p><strong>DDS Tuning</strong></p>
+<p>The default DDS settings (Galactic) may not be optimal for data transmission. Different DDS settings can have varying
+performance. In this example, we use CycloneDDS. For more detailed information, please refer to the
+<a class="reference external" href="https://docs.ros.org/en/humble/How-To-Guides/DDS-tuning.html">ROS DDS Tuning</a>。</p>
+<p>● Edit cyclonedds configuration file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>gedit<span class="w"> </span>/etc/cyclonedds/config.xml
+</pre></div>
+</div>
+<p>Add</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;CycloneDDS</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;https://cdds.io/config&quot;</span><span class="w"> </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="w">            </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;https://cdds.io/confighttps://raw.githubusercontent.com/eclipse-cyclonedds/cyclonedds/master/etc/cyclonedds.xsd&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Domain</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;any&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;General&gt;</span>
+<span class="w">            </span><span class="nt">&lt;NetworkInterfaceAddress&gt;</span>lo<span class="nt">&lt;/NetworkInterfaceAddress&gt;</span>
+<span class="w">            </span><span class="nt">&lt;AllowMulticast&gt;</span>false<span class="nt">&lt;/AllowMulticast&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/General&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Internal&gt;</span>
+<span class="w">            </span><span class="nt">&lt;MinimumSocketReceiveBufferSize&gt;</span>16MB<span class="nt">&lt;/MinimumSocketReceiveBufferSize&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Internal&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Discovery&gt;</span>
+<span class="w">            </span><span class="nt">&lt;ParticipantIndex&gt;</span>auto<span class="nt">&lt;/ParticipantIndex&gt;</span>
+<span class="w">            </span><span class="nt">&lt;MaxAutoParticipantIndex&gt;</span>30<span class="nt">&lt;/MaxAutoParticipantIndex&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Peers&gt;</span>
+<span class="w">                </span><span class="nt">&lt;Peer</span><span class="w"> </span><span class="na">address=</span><span class="s">&quot;localhost&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/Peers&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Discovery&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Domain&gt;</span>
+<span class="nt">&lt;/CycloneDDS&gt;</span>
+</pre></div>
+</div>
+<p>● Set the environment variables, add to <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> or <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span><span class="m">42</span><span class="w"> </span><span class="c1"># Numbers from 0 to 232</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">ROS_LOCALHOST_ONLY</span><span class="o">=</span><span class="m">1</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CYCLONEDDS_URI</span><span class="o">=</span>file:///etc/cyclonedds/config.xml
+</pre></div>
+</div>
+<p>Tip：to understand why the maximum ROS_DOMAIN_ID is 232, please
+visit <a class="reference external" href="https://docs.ros.org/en/humble/Concepts/About-Domain-ID.html">The ROS DOMAIN ID</a>
+● Increase UDP receive buffer size
+Edit</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/sysctl.d/10-cyclone-max.conf
+</pre></div>
+</div>
+<p>Add</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>net.core.rmem_max<span class="o">=</span><span class="m">2147483647</span>
+net.core.rmem_default<span class="o">=</span><span class="m">2147483647</span>
+</pre></div>
+</div>
+<p>If you use Fast DDS, you can refer to the <a class="reference external" href="./docs/fastdds_tuning">Fast DDS Configuration</a> file.</p>
+<p><strong>Increase usbfs_memory_mb Value</strong></p>
+<ul class="simple">
+<li><p>Increase the <code class="docutils literal notranslate"><span class="pre">usbfs_memory_mb</span></code> value to 128MB (this is a reference value and can be adjusted based on your system’s needs)
+by running the following command:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">128</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/sys/module/usbcore/parameters/usbfs_memory_mb
+</pre></div>
+</div>
+<ul>
+<li><p>To make this change permanent, check <a class="reference external" href="https://github.com/OpenKinect/libfreenect2/issues/807">this link</a>.</p></li>
+<li><p>The permanent steps are as follows:</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">/etc/default/grub</span></code> file,Find and replace</p>
+</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet splash&quot;</span>
+</pre></div>
+</div>
+<p>with this</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet splash usbcore.usbfs_memory_mb=128&quot;</span>
+</pre></div>
+</div>
+<p>Update grub</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>update-grub
+</pre></div>
+</div>
+<p>Reboot and check</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cat<span class="w"> </span>/sys/module/usbcore/parameters/usbfs_memory_mb
+</pre></div>
+</div>
+</section>
+<section id="common-configurations">
+<h2><span class="section-number">2.1.3. </span>Common Configurations<a class="headerlink" href="#common-configurations" title="Link to this heading"></a></h2>
+<section id="use-v4l2-backend">
+<h3><span class="section-number">2.1.3.1. </span>Use V4L2 backend<a class="headerlink" href="#use-v4l2-backend" title="Link to this heading"></a></h3>
+<p>To enable the V4L2 backend for the Gemini2 series cameras, follow these steps:</p>
+<ol class="simple">
+<li><p>The Gemini2 series cameras support the V4L2 backend.</p></li>
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">config/OrbbecSDKConfig_v1.0.xml</span></code> file.</p></li>
+<li><p>Set the navigation option to <code class="docutils literal notranslate"><span class="pre">LinuxUVCBackend</span></code>.</p></li>
+<li><p>Change the backend setting to <code class="docutils literal notranslate"><span class="pre">V4L2</span></code>.</p></li>
+</ol>
+<p>Note: The V4L2 backend is not enabled by default.</p>
+</section>
+<section id="predefined-presets">
+<h3><span class="section-number">2.1.3.2. </span>Predefined presets<a class="headerlink" href="#predefined-presets" title="Link to this heading"></a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Preset</th>
+<th>Features</th>
+<th>Recommended use cases</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default</td>
+<td>- Best visual perception``- Overall good performance in accuracy, fill rate, tiny objects, etc.</td>
+<td>- Generic <code>&lt;br&gt;</code>- Robotics</td>
+</tr>
+<tr>
+<td>Hand</td>
+<td>- Clear hand and finger edges</td>
+<td>- Gesture recognition</td>
+</tr>
+<tr>
+<td>High Accuracy</td>
+<td>- Depth of high confidence <code>&lt;br&gt;</code>- Barely noise depth values <code>&lt;br&gt;</code>- Lower fill rate</td>
+<td>- Collision avoidance <code>&lt;br&gt;</code>- Object scanning</td>
+</tr>
+<tr>
+<td>High Density</td>
+<td>- Higher fill rate <code>&lt;br&gt;</code>- More tiny objects <code>&lt;br&gt;</code>- May suffer from noise depth values</td>
+<td>- Object recognition <code>&lt;br&gt;</code>- Pick &amp; place <code>&lt;br&gt;</code>- Foreground &amp; background animation</td>
+</tr>
+<tr>
+<td>Medium Density</td>
+<td>- Balanced performance in fill rate and accuracy <code>&lt;br&gt;</code>- In comparison to Default: lower fill rate, better edge quality</td>
+<td>- Generic and alternative to Default</td>
+</tr>
+<tr>
+<td>Custom</td>
+<td>- User defined Preset <code>&lt;br&gt;</code>- Derived from Presets above, with customized modifications, e.g. a new configuration for the post-processing pipeline, modified mean intensity set point of depth AE function, etc.</td>
+<td>- Better depth performance achieved using customized configurations in comparison to using predefined presets <code>&lt;br&gt;</code>- For well-established custom configurations</td>
+</tr>
+</tbody>
+</table><p>Choose the appropriate preset name based on your specific use case and set it as the value for the <code class="docutils literal notranslate"><span class="pre">device_preset</span></code>
+parameter.</p>
+</section>
+<section id="depth-work-mode-switch">
+<h3><span class="section-number">2.1.3.3. </span>Depth work mode switch<a class="headerlink" href="#depth-work-mode-switch" title="Link to this heading"></a></h3>
+<p>OrbbecSDK_ROS2 supports the depth work mode switch. The depth work mode switch is supported by Gemini 2, Gemini 2 L,
+and Femto and Femto Bolt cameras.</p>
+<ul class="simple">
+<li><p>Before starting the camera, depth work mode (depth_work_mode) can be configured for the corresponding xxx.launch.py
+file’s support.</p></li>
+<li><p>The depth work mode switch is supported by Gemini 2, Gemini 2 L, and Gemini 2 XL cameras.</p></li>
+<li><p>The default depth work mode configuration of xxx.launch.py is the camera’s default configuration. If you need to
+modify it, you can switch to the corresponding mode as needed.</p></li>
+<li><p>The specific camera depth work mode support types can be found in the comments of the depth mode.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Depth work mode support is as follows:</span>
+<span class="c1"># Unbinned Dense Default</span>
+<span class="c1"># Unbinned Sparse Default</span>
+<span class="c1"># Binned Sparse Default</span>
+<span class="c1"># Obstacle Avoidance</span>
+<span class="n">DeclareLaunchArgument</span><span class="p">(</span><span class="s1">&#39;depth_work_mode&#39;</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>View depth work modes:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>orbbec_camera<span class="w"> </span>list_depth_work_mode_node
+</pre></div>
+</div>
+</section>
+<section id="configuration-of-depth-nfov-and-wfov-modes">
+<h3><span class="section-number">2.1.3.4. </span>Configuration of depth NFOV and WFOV modes<a class="headerlink" href="#configuration-of-depth-nfov-and-wfov-modes" title="Link to this heading"></a></h3>
+<p>For the Femto Mega and Femto Bolt devices, the NFOV and WFOV modes are implemented by configuring the resolution of
+Depth and IR in the launch file.
+In launch file, depth_width、depth_height、ir_width、ir_height represents the resolution of the depth and the resolution of
+the IR.
+The frame fps and resolution of IR must be consistent with the depth. The correspondence between different modes and
+resolutions is as follows:</p>
+<ul class="simple">
+<li><p>NFOV unbinned: 640 x 576.</p></li>
+<li><p>NFOV binned: 320 x 288.</p></li>
+<li><p>WFOV unbinned: 1024 x 1024.</p></li>
+<li><p>WFOV binned: 512 x 512.</p></li>
+</ul>
+</section>
+<section id="network-device-enumeration">
+<h3><span class="section-number">2.1.3.5. </span>Network device enumeration<a class="headerlink" href="#network-device-enumeration" title="Link to this heading"></a></h3>
+<p>Currently, the network device enumeration function is supported only by the Femto Mega device. When accessing this
+device over the network, if <code class="docutils literal notranslate"><span class="pre">enumerate_net_device</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the device will be automatically enumerated,
+eliminating the need to configure the IP address in advance or set the enable switch to true. The specific configuration
+methods are as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enumerate_net_device</span></code>: enumeration network device automatically, only supported by Femto Mega.
+if <code class="docutils literal notranslate"><span class="pre">enumerate_net_device</span></code> set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the device will be enumerated automatically,No need to set
+the <code class="docutils literal notranslate"><span class="pre">net_device_ip</span></code>
+and <code class="docutils literal notranslate"><span class="pre">net_device_port</span></code> parameters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">net_device_ip</span></code>: The IP address of the device.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">net_device_port</span></code>: The port number of the device.</p></li>
+</ul>
+</section>
+<section id="compressed-image">
+<h3><span class="section-number">2.1.3.6. </span>Compressed Image<a class="headerlink" href="#compressed-image" title="Link to this heading"></a></h3>
+<p>You can use image_transport to compress the image using jpeg. Below is an example of how to use it:
+To access the compressed color image, you can use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/camera/color/image_raw/compressed<span class="w"> </span>--no-arr
+</pre></div>
+</div>
+<p>This command will allow you to receive the compressed color image from the specified topic.</p>
+<p><strong>Note:</strong> The compressed topic for depth is /camera/depth/image_raw/compressedDepth. The compressed topics for color and IR are /camera/color/image_raw/compressed and /camera/ir/image_raw/compressed, respectively.</p>
+</section>
+</section>
+<section id="build-project">
+<h2><span class="section-number">2.1.4. </span>Build project<a class="headerlink" href="#build-project" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+<span class="c1"># build release, Default is Debug</span>
+colcon<span class="w"> </span>build<span class="w"> </span>--event-handlers<span class="w"> </span>console_direct+<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</pre></div>
+</div>
+</section>
+<section id="building-a-debian-package">
+<h2><span class="section-number">2.1.5. </span>Building a Debian Package<a class="headerlink" href="#building-a-debian-package" title="Link to this heading"></a></h2>
+<p><strong>Preparing the Environment</strong></p>
+<p>Before starting, install the required tools:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>debhelper<span class="w"> </span>fakeroot<span class="w"> </span>python3-bloom
+</pre></div>
+</div>
+<p><strong>Configuring ROS Dependencies</strong></p>
+<p>Add the following YAML file to your system at <code class="docutils literal notranslate"><span class="pre">/etc/ros/rosdep/sources.list.d/00-orbbec.yaml</span></code>. Make sure to
+replace <code class="docutils literal notranslate"><span class="pre">focal</span></code> with the codename of your Ubuntu version and <code class="docutils literal notranslate"><span class="pre">humble</span></code> with your ROS2 distribution name:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">orbbec_camera_msgs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ubuntu</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">focal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">ros-humble-orbbec-camera-msgs</span><span class="w"> </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Next, create a new file <code class="docutils literal notranslate"><span class="pre">/etc/ros/rosdep/sources.list.d/50-orbbec.list</span></code> and add this line to specify the path to the
+YAML file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yaml<span class="w"> </span>file:///etc/ros/rosdep/sources.list.d/00-orbbec.yaml
+</pre></div>
+</div>
+<p>Update the rosdep database to reflect these changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>update
+</pre></div>
+</div>
+<p><strong>Building the Package</strong></p>
+<p>Navigate to your workspace and build the project:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+colcon<span class="w"> </span>build<span class="w"> </span>--event-handlers<span class="w"> </span>console_direct+<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+.<span class="w"> </span>install/setup.bash
+<span class="nb">cd</span><span class="w"> </span>src/OrbbecSDK_ROS2/
+bash<span class="w"> </span>.make_deb.sh
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="2. Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="package_description.html" class="btn btn-neutral float-right" title="2.2. Package description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ORBBEC INC. www.orbbec.com.cn.
+      <span class="lastupdated">Last updated on 2024-11-04 14:58:37.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

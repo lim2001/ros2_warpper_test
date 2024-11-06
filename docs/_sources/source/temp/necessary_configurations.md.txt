@@ -1,0 +1,23 @@
+# Necessary configurations
+
+## Install dependencies
+
+sudo pip install -U rosdep
+sudo rosdep init
+rosdep update --rosdistro=$ROS_DISTRO
+rosdep install --from-paths src --ignore-src -r -y
+
+
+## udev rules configguration
+
+
+
+## CycloneDDS configuration
+
+
+
+## FastDDS configuration
+
+
+
+## usbfs_memory_mb

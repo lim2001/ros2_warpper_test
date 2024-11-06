@@ -1,0 +1,33 @@
+# Robot integrations
+
+This section introduces robotic integration application examples based on Orbbec SDK ROS2, showcasing practical implementations for developers to leverage in their projects.
+
+&nbsp;
+
+<!-- TOC -->
+
+- Contents:
+  - [Example 1](#example-1)
+  - [Example 2](#example-2)
+
+<!-- TOC -->
+
+&nbsp;
+
+---
+
+## Example 1
+
+&nbsp;
+
+**Automation in Automotive Parts Manufacturing:**
+
+In a large-scale automotive parts manufacturing plant, 3D vision technology is applied to the automated production process of gear shafts. The plant has implemented an integrated solution of "3D vision + robot" to achieve the automated production of gear shafts. In this process, the self-developed Mech-Eye industrial-grade 3D camera can image high-brightness, reflective, and complex-structured gear shafts with high quality. The 3D vision system supports complex processes, including picking raw parts from a basket and placing them on the assembly line for processing, picking up empty baskets, and picking up processed gear shafts and arranging them into baskets. Additionally, the 3D vision system can determine whether the workpiece has been machined, avoiding mispicks and misplacements, and can handle situations such as deformed or inconsistently sized baskets, working with simple containers for production.
+
+
+## Example2
+
+
+**Warehouse Automation in Logistics and Supply Chain Management:**
+
+A logistics and supply chain management company has implemented a 3D robotic vision system in its warehouse logistics for size-based sorting of inventory and detection of defective packages. The company required a 3D vision system capable of using a 3D camera for workpiece and box picking applications. In the middle of the conveyor belt, the control system is 10 meters away from the mechanical arm and 10 GigE industrial 3D camera setup. For the detection system, it must process and analyze a large amount of high-resolution 3D images within seconds. Advantech's comprehensive 3D robotic vision solution, composed of an image acquisition card, GPU card, GPU server, and motion controller running control engine mode, enables real-time analysis of high-resolution images and point cloud data, providing excellent real-time collaborative capabilities.

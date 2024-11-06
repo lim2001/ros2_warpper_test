@@ -1,0 +1,45 @@
+# Benchmark
+
+
+To apply Benchmark tools to OrbbecSDK ROS2 for evaluating and testing the performance of 3D camera vision in robotic integration applications, follow these steps:
+
+
+## Launch Orbbec Camera Node
+
+Launch the Orbbec camera node in a terminal:
+
+
+```bash
+cd ~/ros2_ws/
+source /opt/ros/humble/setup.bash # or source /opt/ros/humble/setup.zsh
+source install/setup.bash  # or source install/setup.szh
+ros2 launch orbbec_camera orbbec_camera.launch.py config_file_path:=gemini_330_series.yaml
+```
+
+## Use Benchmark Tools
+
+ROS 2 provides Benchmark tools for performance measurement. You can use these tools to evaluate the actual performance of robotic applications under load, including the message transmission costs in RCL. Benchmark tools can measure results without modifying nodes and use standard input rosbag datasets for independent benchmark result verification.
+
+* Obtain the `ros2_benchmark` tool:
+
+```bash
+The ros2_benchmark 613for Humble is available now at github.com/NVIDIA-ISAAC-ROS/ros2_benchmark 613.
+```
+
+* Download the standard input dataset `r2b dataset`:
+
+```bash
+The r2b dataset 2023130for standard input data to benchmarking is available for download from NGC.
+```
+
+## Configure and Run Benchmark
+
+Configure Benchmark parameters, including data input length, publication rate, input size, etc., and customize using a configuration file. Then run the Benchmark tool, which will automatically perform multiple performance measurements, discard the minimum and maximum results to reduce variability, and report the results in log files.
+
+## Analyze Results
+
+Benchmark results will be output in JSON format, including the parameters used for running the benchmarks and the MD5 of the input rosbag, for independent and verifiable results. You can import these results into your chosen visualization tool for further analysis.
+
+By following these steps, you can use Benchmark tools to evaluate the performance of OrbbecSDK ROS2 in 3D camera vision and robotic integration applications. This will help you understand potential performance bottlenecks encountered in actual applications and make corresponding optimizations.
+
+Please note that the specific commands and tools mentioned above are for illustrative purposes and may vary depending on the actual version and setup of your ROS 2 environment and OrbbecSDK. Always refer to the official documentation for the most accurate guidance.

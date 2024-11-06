@@ -1,0 +1,30 @@
+# Supported cameras
+
+&nbsp;
+
+- The specific supported cameras model are as follows:
+
+| No. | **Products List** | **Firmware Version** | Port interface types        | product link                                                            | dataset |
+| --- | ----------------------- | -------------------------- | --------------------------- | ----------------------------------------------------------------------- | ------- |
+| 1   | Gemini 335              | 1.2.20                     | USB 3.0                     | [link](https://www.orbbec.com/products/stereo-vision-camera/gemini-335/)   |         |
+| 2   | Gemini 335L             | 1.2.20                     | USB 3.0                     | [link](https://www.orbbec.com/products/stereo-vision-camera/gemini-335l/)  |         |
+| 3   | Gemini 335Lg            | 1.3.46                     | USB 3.0、GMSL interface     | [link](https://www.orbbec.com/products/stereo-vision-camera/gemini-335lg/) |         |
+| 4   | Gemini 336              | 1.2.20                     | USB 3.0                     | [link](https://www.orbbec.com/products/stereo-vision-camera/gemini-336)    |         |
+| 5   | Gemini 336L             | 1.2.20                     | USB 3.0                     | [link](https://www.orbbec.com/products/stereo-vision-camera/gemini-336l)   |         |
+| 6   | Gemini 2                | 1.4.60 /1.4.76             | USB 3.0                     | [link](https://www.orbbec.com/products/stereo-vision-camera/gemini-2/)     |         |
+| 7   | Gemini 2 L              | 1.4.32                     | USB 3.0                     | [link](https://www.orbbec.com/products/stereo-vision-camera/gemini-2l/)    |         |
+| 8   | Astra 2                 | 2.8.20                     | USB 3.0                     | [link](https://www.orbbec.com/products/structured-light-camera/astra-2/)   |         |
+| 9   | Femto Bolt              | 1.0.6/1.0.9                | USB 3.0                     | [link](https://www.orbbec.com/products/tof-camera/femto-bolt/)             |         |
+| 10  | Femto Mega              | 1.1.7/1.2.7                | USB 3.0、Ethernet interface | [link](https://www.orbbec.com/products/tof-camera/femto-mega/)             |         |
+
+&nbsp;
+
+&nbsp;
+
+- For more product information, please refer to the official website link:[https://www.orbbec.com/products](https://www.orbbec.com/products/)
+
+![supported_cameras](../image/supported_cameras.png)
+
+&nbsp;
+
+&nbsp;

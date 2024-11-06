@@ -1,0 +1,83 @@
+# Multi camera sync
+
+
+
+<!-- TOC -->
+
+- Contents:
+
+  - [Preparation](#preparation)
+  - [Check the camera usb port](#check-the-camera-usb-port)
+  - [Configure multi_camera_synced.launch.py](#configure-multi_camera_synced.launch.py)
+  - [Run multi_camera_synced.launch.py](#run-multi_camera_synced.launch.py)
+  - [Advanced Parameters](#advanced-parameters)
+  - [Gmsl example](#gmsl-example)
+<!-- TOC -->
+
+----------------------------------------------------------------
+
+
+
+## Preparation
+
+First, please read the Multi-machine Synchronizer User Documentation:[https://www.orbbec.com/docs/set-up-cameras-for-external-synchronization_v1-2/](https://www.orbbec.com/docs/set-up-cameras-for-external-synchronization_v1-2/)
+
+Secondly,make sure the camera is properly connected to the multi-camera synchronizer
+
+Finally,please browse the launch file for multi-machine synchronous startup:[https://github.com/orbbec/OrbbecSDK_ROS2/blob/main/orbbec_camera/launch/multi_camera_synced.launch.py](https://github.com/orbbec/OrbbecSDK_ROS2/blob/main/orbbec_camera/launch/multi_camera_synced.launch.py)
+
+## Check the camera usb port
+
+```bash
+ros2 run orbbec_camera list_devices_node
+```
+
+Output:
+
+![Multi_camera1](../image/Multi_camera1.png)
+
+## Configure multi_camera_synced.launch.py
+
+Open multi_camera_synced.launch.py, the camera configuration is as shown below
+
+![Multi_camera1](../image/Multi_camera2.png)
+
+1.gemini_330_series.launch.py is the camera startup file
+
+2.camera_name is set to front_camera, for example, the color image topic name is /front_camera/color/image_raw"
+
+3.**usb_port is set to 2-7, indicating that the 2-7 camera device is started**, 2-7 is taken from the usb port output by ros2 run orbbec_camera list_devices_node
+
+4.device_num is set to 4, indicating that four cameras are started
+
+5.**sync_mode is set to software_triggering**, indicating that the 2-7 camera device is set to software trigger mode, and the selection of multi-machine synchronization mode can refer to the following figure
+
+6.Calling the parameter settings in config_file_path will overwrite the parameter settings in emini_330_series.launch.py, optional
+
+![Multi_camera1](../image/Multi_camera3.png)
+
+multi_camera_synced.launch.py camera startup order, the host must be started last
+
+![Multi_camera1](../image/Multi_camera4.png)
+
+## Run multi_camera_synced.launch.py
+
+```bash
+ros2 launch orbbec_camera multi_camera_synced.launch.py
+```
+
+## Advanced Parameters
+
+Some camera parameters are related to multi-camera sync
+
+| Camera parameters       | action                                                        |
+| ----------------------- | ------------------------------------------------------------- |
+| trigger_out_enabled     | Trigger signal switch setting                                 |
+| trigger2image_delay_us  | Configure the secondarydepth delay and secondarycolor delay  |
+| trigger_out_delay_us    | Trigger signal delay                                          |
+| frames_per_trigger      | Software trigger frequency(used with software_trigger_period) |
+| software_trigger_period | Software trigger interval(used with frames_per_trigger)       |
+
+## Gmsl example
+
+![Multi_camera1](../image/gmsl_1.png)
